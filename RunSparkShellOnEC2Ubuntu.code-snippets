@@ -1,0 +1,66 @@
+//updating System
+    1  sudo apt-get update -y
+//Installing JDK 11
+    2  sudo apt-get install openjdk-11-jre openjdk-11-jdk
+    3  java -version
+    4  jshell
+
+         >/exit
+
+//Installing Apache Spark
+    5  wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+
+//Extracting Zip files
+    6  tar -xf spark-3.5.0-bin-hadoop3.tgz
+    7  rm spark-3.5.0-bin-hadoop3.tgz
+
+//Ensure that the Spark directory is correct by listing its contents:
+    8  ls /home/ubuntu/spark-3.5.0-bin-hadoop3
+
+//If the directory doesn't exist in /home/ubuntu, 
+//try locating the Spark directory by navigating to the home directory and listing its contents:
+
+    9  cd ~
+    10  ls
+
+//Set Environment Variables:
+    11  nano ~/.bashrc
+
+          export SPARK_HOME=/home/ubuntu/spark-3.5.0-bin-hadoop3
+          export PATH=$PATH:$SPARK_HOME/bin
+         
+          >^s
+          >^X
+     
+//Apply Changes:
+   12  source ~/.bashrc
+   13  jps
+   14  nano input.txt
+   15  spark-shell
+  
+
+// Read the input text file
+    16.val textFile = sc.textFile("input.txt")
+
+// Split each line into words and flatten the result
+    17.val words = textFile.flatMap(line => line.split(" "))
+
+// Map each word to a key-value pair (word, 1)
+    18.val wordCounts = words.map(word => (word, 1))
+
+// Sum the counts for each word
+    19.val result = wordCounts.reduceByKey(_ + _)
+
+// Print the result
+    20.result.collect().foreach(println)
+
+
+.............OUTPUT...................
+
+    21. :q
+
+
+
+
+
+
