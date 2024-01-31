@@ -1,4 +1,7 @@
-//creating RDD
+//creating RDD  And Tramsformations And Actions
+.................................................................................
+
+
 1.val Rdd1=sc.parallelize(List(1,2,3,4))
 
 
@@ -18,15 +21,68 @@
 
 ..........................................
 //FlatMap
-1.val Rdd2=sc.parallelize(List(1,2))
+1. val Rdd2=sc.parallelize(List(1,2))
 
-2.val mapRdd2=Rdd2.map(x=>x.to(3))
+2. val mapRdd2=Rdd2.map(x=>x.to(3))
 //O/P=>Array(Range 1 to 3, Range 2 to 3)
 
 
-3.val flatmapRdd2=Rdd2.flatMap(x=>x.to(3))
+3. val flatmapRdd2=Rdd2.flatMap(x=>x.to(3))
 
-4 flatmapRdd2.collect
+4. flatmapRdd2.collect
 //O/P=> Array[Int] = Array(1, 2, 3, 2, 3)
+
+............................................
+//Distinct
+
+1.val rdd3=sc.parallelize(List(1,1,2,3,2,4))
+2. val distinctrdd3=rdd3.distinct
+3. distinctrdd3.collect
+//O/P=>Array[Int] = Array(4, 2, 1, 3)
+...............................................
+//UNION
+1.val rdd4 =sc.parallelize(List(1,2,3,4))
+2.val rdd5 =sc.parallelize(List(4,5))
+3.val unionrdd=rdd4.union(rdd5)
+4.unionrdd.collect
+//O/P=> Array[Int] = Array(1, 2, 3, 4, 4, 5)
+...............................................
+
+//INTERSECTION
+
+5.val intersectionrdd=rdd4.intersection(rdd5)
+6.intersectionrdd.collect
+//O/P=>Array[Int] = Array(4)
+...............................................
+
+//Subtract
+1.val subtractrdd=rdd4.subtract(rdd5)
+2.subtractrdd.collect
+O/P=>Array[Int] = Array(2, 1, 3)
+
+..............................................
+ACTIONS
+..............................................
+//Collect
+1.subtractrdd.collect
+2.unionrdd.collect
+3.distinctrdd3.collect
+etc.....
+..........................................
+
+//REDUCE
+rdd4.reduce((x,y)=>x+y)
+//O/P=> Int = 10
+...........................................
+
+//Take
+rdd4.take(2)
+//O/P=>Array[Int] = Array(1, 2)
+
+.............................................
+
+//top
+rdd4.top(3)
+//O/P=>Array[Int] = Array(4, 3, 2)
 
 
