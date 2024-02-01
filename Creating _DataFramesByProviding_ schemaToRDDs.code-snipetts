@@ -1,0 +1,25 @@
+
+
+ spark-shell --conf spark.sql.catalogImplementation=in-memory */
+ import org.apache.spark.sql.Row
+ import org.apache.spark.sql.types._
+
+
+//creating RDD
+val studrdd = sc.parallelize(Array(Row(1,"Rajat",36),(Row(2,"Sanket",39))))
+
+//Creating Scema
+val schema009=StructType(
+                                Array(
+                                          StructField("Rollno",IntegerType),
+                                          StructField("Name",StringType),
+                                          StructField("Marks",IntegerType)
+                                     )
+                      )
+
+//attaching Scema to RDD
+ val StudDf=spark.createDataFrame(studrdd,schema009)
+
+StudDf.printSchema
+
+StudDf.show
