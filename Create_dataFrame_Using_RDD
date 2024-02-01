@@ -1,0 +1,32 @@
+//Create_DataFrame_Using_RDD
+
+1.spark-shell --conf spark.sql.catalogImplementation=in-memory */
+
+//CreatingRdd
+
+2.val Firstrdd=sc.parallelize(1 to 10).map(x=>(x,"Dataframe_Data"))
+3. Firstrdd.collect().foreach(println)
+
+//Creating DATAFRAME fromRDD
+1.val firstdf=Firstrdd.toDF("id","simple_string")
+2. firstdf.show
+
+/*  OUTPUT
++---+--------------+
+| id| simple_string|
++---+--------------+
+|  1|Dataframe_Data|
+|  2|Dataframe_Data|
+|  3|Dataframe_Data|
+|  4|Dataframe_Data|
+|  5|Dataframe_Data|
+|  6|Dataframe_Data|
+|  7|Dataframe_Data|
+|  8|Dataframe_Data|
+|  9|Dataframe_Data|
+| 10|Dataframe_Data|
++---+--------------+
+*/
+
+
+
