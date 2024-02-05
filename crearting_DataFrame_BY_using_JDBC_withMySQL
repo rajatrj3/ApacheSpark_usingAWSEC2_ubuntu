@@ -1,0 +1,51 @@
+
+.\spark-shell --conf "spark.sql.catalogImplementation=in-memory"
+
+ import org.apache.spark.sql.Row
+ import org.apache.spark.sql.types._
+
+
+val mysqlUrl = "jdbc:mysql://localhost/<databasename>"
+
+
+val studentDF = spark.read.format("jdbc").
+     |          option("driver","com.mysql.jdbc.Driver").
+     |          option("url",mysqlUrl).
+     |          option("dbtable","<tablename>").
+     |          option("user","root").
+     |          option("password","Rajat@2001").
+     |          load()
+
+
+ studentDF.printSchema
+
+ studentDF.show
+                     //creating view of dataframe &register
+ studentDF.createOrReplaceTempView("studenttabledemo")
+
+ spark.catalog.listTables.show
+
+
+//sparkSQL
+
+
+ spark.sql("select * from studenttabledemo").show
+..............................................................
+              //global temp view on dataframe
+
+
+
+studentDF createOrReplace
+
+studentDF.createOrReplaceGlobalTempView("globalstudenttable")
+
+
+spark.sql("select * from global_temp.globalstudenttable").show
+
+
+
+
+
+
+
+
